@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from werkzeug.exceptions import abort
-from pivotpointsfiblist import fibRetracementList
+from pivotpointsfiblist import fibRetracementListL2H
+from pivotpointsfiblist import fibRetracementListH2L
+from pivotpointsfiblist import pivotPointsLowAndHigh
 
 app = Flask(__name__)
 
@@ -20,8 +22,29 @@ empDB = [
 # Get fib retracement
 @app.route('/fib/h2l', methods=['GET'])
 def getFibRetracementHighToLow():
-    return fibRetracementList()
+    stock = request.args.get('sym')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    candles = int(request.args.get('candles'))
+    return fibRetracementListH2L(stock, start, end, candles)
 
+# Get fib retracement
+@app.route('/fib/l2h', methods=['GET'])
+def getFibRetracementLowToHigh():
+    stock = request.args.get('sym')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    candles = int(request.args.get('candles'))
+    return fibRetracementListL2H(stock, start, end, candles)
+
+# Get fib retracement
+@app.route('/pivotpoints', methods=['GET'])
+def getPivotPoints():
+    stock = request.args.get('sym')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    candles = int(request.args.get('candles'))
+    return pivotPointsLowAndHigh(stock, start, end, candles)
 
 #Delete request
 @app.route('/empdb/employee/<empId>',methods=['DELETE'])
