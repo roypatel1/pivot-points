@@ -4,7 +4,7 @@ from pivotpointsfiblist import fibRetracementListL2H, fibRetracementListH2L, piv
 
 app = Flask(__name__)
 
-# Get fib retracement
+# Get fib retracement high to low
 @app.route('/fib/h2l', methods=['GET'])
 def get_fib_retracement_high_to_low():
     stock = request.args.get('sym')
@@ -14,7 +14,7 @@ def get_fib_retracement_high_to_low():
     return fibRetracementListH2L(stock, start, end, candles)
 
 
-# Get fib retracement
+# Get fib retracement low to high
 @app.route('/fib/l2h', methods=['GET'])
 def get_fib_retracement_low_to_high():
     stock = request.args.get('sym')
