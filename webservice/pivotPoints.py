@@ -49,7 +49,7 @@ def pivotPoints(candles, listHigh, listlow):
     max_value_index = listHigh.index(max_value)
     h = max_value_index
     while h < candles:
-        if (listHigh[h] > max(listHigh[h + 1:i + 1 + candles])):
+        if (listHigh[h] > max(listHigh[h + 1:h + 1 + candles])):
             if (h == 0):
                 pivotHighPrice.append(round(listHigh[h], 2))
                 h = h + 1
